@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>LetsFlash</title>
+<style>
+@font-face{font-family:Inter;src:url("./assets/fonts/inter-regular.otf") format("opentype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url("./assets/fonts/inter-bold.otf") format("opentype");font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:Lato;src:url("./assets/fonts/lato-regular.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Lato;src:url("./assets/fonts/lato-bold.ttf") format("truetype");font-style:normal;font-weight:700;font-display:swap}
+:root{color-scheme:dark;--hanzi-font:"Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif;--english-font:Roboto,"Arial",sans-serif;--hanzi-size:54px;--english-size:23px;--bg:#0b1020;--panel:#141c2f;--panel2:#1b2740;--text:#f4f7ff;--muted:#9eabc4;--line:#2a3854;--accent:#8b9cff;--accent2:#b7c0ff;--good:#39b982;--warn:#e5ad50;--bad:#ed7777;--shadow:0 16px 45px #0005}
+:root[data-theme="light"]{color-scheme:light;--bg:#f4f6fb;--panel:#fff;--panel2:#edf1f8;--text:#172033;--muted:#68758d;--line:#dce3ef;--accent:#5268dc;--accent2:#4055c6;--good:#16885c;--warn:#a96b08;--bad:#c64c4c;--shadow:0 12px 35px #27334a18}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 var(--english-font);min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.app{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 16px calc(28px + env(safe-area-inset-bottom))}.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0 14px}.brand{display:flex;gap:11px;align-items:center}.logo{width:44px;height:44px;flex:none;border-radius:14px;object-fit:cover;background:#100c20;box-shadow:0 4px 18px #8b42ff55}.brand h1{font-size:18px;margin:0}.brand small{color:var(--muted)}.iconbtn,.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:10px 13px}.btn.primary{background:var(--accent);color:#11172c;border-color:transparent;font-weight:750}.btn.ghost{background:transparent}.btn.danger{color:var(--bad)}.btn:disabled{opacity:.4;cursor:not-allowed}.row{display:flex;align-items:center;gap:9px}.between{justify-content:space-between}.muted{color:var(--muted)}.tiny{font-size:12px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow)}.hero{padding:19px;background:linear-gradient(135deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;margin:7px 0 18px}.hero h2{margin:0 0 4px;font-size:22px}.hero p{margin:0;color:var(--muted)}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 10px}.sectionhead h2{font-size:16px;margin:0}.decklist{display:grid;gap:10px}.deck{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:14px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:17px}.deckicon{width:43px;height:43px;flex:none;border-radius:14px;background:var(--panel2);display:grid;place-items:center;font-size:19px}.deckmain{min-width:0;flex:1}.deckname{font-weight:750;overflow-wrap:anywhere}.deckmeta{font-size:12px;color:var(--muted)}.progress{height:6px;border-radius:8px;background:var(--panel2);overflow:hidden;margin-top:8px}.progress>i{display:block;height:100%;background:var(--accent);width:0}.empty{text-align:center;padding:34px 18px;color:var(--muted);border:1px dashed var(--line);border-radius:18px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions>*{flex:1}.field{display:grid;gap:6px;margin:11px 0}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field textarea,.field select,.typing{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--text)}textarea{resize:vertical;min-height:80px}.hidden{display:none!important}.view{display:none}.view.active{display:block}.cardtop{margin:12px 0;display:flex;justify-content:space-between;align-items:center}.flash{min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px 18px;background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.word{font-family:var(--hanzi-font);font-size:clamp(32px,9vw,var(--hanzi-size));font-weight:800;line-height:1.25;overflow-wrap:anywhere}.hanzi-text,.hanzi-inline{font-family:var(--hanzi-font)!important}.english-text,.pinyin{font-family:var(--english-font)!important}.meaning{font-size:var(--english-size)}.font-preview-hanzi{font-family:var(--hanzi-font)}.font-preview-english{font-family:var(--english-font)}#f_front{font-family:var(--hanzi-font)}#f_pinyin,#f_meaning,#f_translation,#f_example_pinyin,#f_example_translation{font-family:var(--english-font)}.font-manager .field{margin:9px 0}.font-manager .font-actions{display:flex;gap:8px;flex-wrap:wrap}.font-manager .font-actions>*{flex:1}.font-preview{padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel2);margin-top:10px}.font-list{display:grid;gap:7px;margin-top:8px}.font-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:var(--panel2);border-radius:10px}.font-item span{min-width:0;overflow-wrap:anywhere}.pinyin{font-size:calc(var(--english-size) * .83);color:var(--accent2);margin-top:12px}.meaning{font-size:var(--english-size);font-weight:750;margin-top:12px}.answer{width:100%;text-align:left;margin-top:20px;border-top:1px solid var(--line);padding-top:16px}.answer p{margin:8px 0}.answer img{max-width:100%;max-height:210px;object-fit:contain;border-radius:13px;display:block;margin:12px auto}.audio{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:var(--panel2);margin-top:10px}.typingbox{margin:12px 0}.typing{min-height:48px}.nav{display:flex;gap:8px;margin:13px 0}.nav button{flex:1}.ratings{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:13px 0}.rating{padding:11px 3px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:12px}.rating b{display:block;font-size:17px}.rating[data-r="again"] b{color:var(--bad)}.rating[data-r="hard"] b{color:var(--warn)}.rating[data-r="good"] b{color:var(--good)}.rating[data-r="easy"] b{color:var(--accent)}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar .btn{flex:1}.divider{border:0;border-top:1px solid var(--line);margin:16px 0}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#202b42;color:#fff;padding:11px 16px;border-radius:14px;box-shadow:var(--shadow);z-index:20;max-width:90%;text-align:center}.modalback{position:fixed;inset:0;background:#0009;display:flex;align-items:flex-end;justify-content:center;z-index:10;padding:12px}.modal{width:min(100%,680px);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:18px}.modal h2{margin:0 0 8px}.modalhead{display:flex;justify-content:space-between;align-items:center}.tag{font-size:11px;padding:4px 8px;border-radius:20px;background:var(--panel2);color:var(--muted)}.footer{padding:20px 0;text-align:center;color:var(--muted);font-size:11px}
+@media(min-width:600px){.app{padding-left:24px;padding-right:24px}.modalback{align-items:center}.flash{min-height:310px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand"><img class="logo" src="./letsflash-logo.png" alt="LetsFlash logo"><div><h1>LetsFlash</h1><small>your personal study space</small></div></div>
+ <div class="row"><button class="iconbtn" id="themeBtn" aria-label="Toggle theme">☼</button><button class="iconbtn" id="settingsBtn" aria-label="Settings">⚙</button></div>
+</header>
+
+<section id="homeView" class="view active">
+ <div class="hero"><h2>Small steps, every day.</h2><p>Your decks stay separate. Choose exactly what you want to study.</p></div>
+ <div class="actions">
+  <button class="btn primary" id="importBtn">＋ Import daily file</button>
+  <button class="btn" id="addDeckBtn">＋ New deck</button>
+ </div>
+ <div class="sectionhead"><h2>Your decks</h2><span class="tag" id="deckCount">0 decks</span></div>
+ <div id="deckList" class="decklist"></div>
+ <div class="footer">Stored on this device · Works offline</div>
+</section>
+
+<section id="studyView" class="view">
+ <div class="row between" style="margin:12px 0"><button class="btn ghost" id="backBtn">← Library</button><span class="tag" id="deckLabel">Deck</span><button class="btn ghost" id="deckMenuBtn">•••</button></div>
+ <div class="cardtop"><span class="muted tiny" id="cardPosition">Card 1 / 1</span><span class="muted tiny" id="deckProgress">0% studied</span></div>
+ <div class="progress"><i id="studyProgress"></i></div>
+ <article class="flash" id="flashcard">
+  <div class="muted tiny english-text" id="category"></div><div class="word hanzi-text" id="frontText" lang="zh-CN">你好</div>
+  <div id="typingArea" class="typingbox hidden"><input class="typing" id="answerInput" placeholder="Type your answer (optional)" autocomplete="off"><div class="row between" style="margin-top:7px"><span class="tiny muted">Try before revealing</span><button class="btn" id="checkBtn">Check answer</button></div><div id="checkResult" class="tiny muted"></div></div>
+  <button class="btn primary" id="revealBtn" style="margin-top:22px;min-width:170px">Show answer</button>
+  <div class="answer hidden" id="answerPanel"></div>
+ </article>
+ <div class="nav"><button class="btn" id="prevBtn">← Previous</button><button class="btn" id="nextBtn">Next →</button></div>
+ <div class="toolbar"><button class="btn" id="shuffleBtn">⇄ Shuffle</button><button class="btn" id="typingToggle">⌨ Typing: Off</button><button class="btn" id="restartBtn">↻ Restart</button></div>
+ <div id="ratingArea" class="hidden"><div class="sectionhead"><h2>How difficult was it?</h2><span class="tiny muted">Saved to this card</span></div><div class="ratings">
+  <button class="rating" data-r="again"><b>×</b>Again</button><button class="rating" data-r="hard"><b>!</b>Hard</button><button class="rating" data-r="good"><b>✓</b>Good</button><button class="rating" data-r="easy"><b>★</b>Easy</button>
+ </div></div>
+</section>
+
+<section id="deckView" class="view">
+ <div class="row between" style="margin:12px 0"><button class="btn ghost" id="deckBackBtn">← Library</button><button class="btn" id="deckEditBtn">Edit deck</button></div>
+ <div class="hero"><h2 id="detailName">Deck</h2><p id="detailInfo">0 cards</p></div>
+ <div class="panel"><div class="row between"><b>Progress</b><b id="detailPercent">0%</b></div><div class="progress"><i id="detailProgress"></i></div><p class="muted tiny" id="detailStats"></p></div>
+ <div class="toolbar"><button class="btn primary" id="studyDeckBtn">Study this deck</button><button class="btn" id="addCardBtn">＋ Add card</button></div>
+ <div class="sectionhead"><h2>Cards</h2><span class="tag" id="detailCardCount">0</span></div>
+ <div id="cardManageList" class="decklist"></div>
+</section>
+
+<section id="settingsView" class="view">
+ <div class="row between"><button class="btn ghost" id="settingsBack">← Back</button><h2 style="font-size:18px">Settings & backup</h2><span></span></div>
+ <div class="panel">
+  <div class="field"><label>Appearance</label><select id="themeSelect"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+  <div class="field"><label for="backgroundColor">Background colour · choose any colour</label><div class="row"><input id="backgroundColor" type="color" value="#0b1020" aria-label="Choose background colour" style="width:64px;height:48px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel)"><input id="backgroundHex" type="text" value="#0b1020" aria-label="Background hex colour" maxlength="7" placeholder="#0b1020"></div><p class="tiny muted">Use the colour wheel to personalise the app background. Your choice is saved on this device.</p><button class="btn ghost" id="resetBackground" type="button">Reset background colour</button></div>
+  <hr class="divider">
+  <section class="font-manager" aria-labelledby="fontSettingsTitle">
+   <div class="row between"><b id="fontSettingsTitle">Typography & fonts</b><span class="tag">Independent controls</span></div>
+   <p class="tiny muted">Choose clear, exam-friendly Chinese characters and a separate English reading font. Changes apply immediately and are saved on this device.</p>
+   <div class="field"><label for="hanziFontSelect">Chinese (Hanzi) font</label><select id="hanziFontSelect"><option value="noto-sans-sc">Noto Sans SC · Recommended</option><option value="noto-serif-sc">Noto Serif SC</option><option value="songti-sc">Songti SC · System classic</option></select></div>
+   <div class="field"><label for="hanziSize">Hanzi size · <span id="hanziSizeLabel">54</span> px</label><input id="hanziSize" type="range" min="32" max="84" step="1" value="54"></div>
+   <div class="font-actions"><button class="btn" id="uploadHanziFont" type="button">＋ Upload Chinese font</button><button class="btn ghost" id="resetHanziFont" type="button">Reset Chinese</button></div>
+   <input type="file" id="hanziFontFile" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" class="hidden">
+   <div id="hanziCustomFonts" class="font-list"></div>
+   <hr class="divider">
+   <div class="field"><label for="englishFontSelect">English font</label><select id="englishFontSelect"><option value="roboto">Roboto · Default</option><option value="inter">Inter</option><option value="lato">Lato</option><option value="georgia">Georgia</option></select></div>
+   <div class="field"><label for="englishSize">English & Pinyin size · <span id="englishSizeLabel">23</span> px</label><input id="englishSize" type="range" min="14" max="36" step="1" value="23"></div>
+   <div class="font-actions"><button class="btn" id="uploadEnglishFont" type="button">＋ Upload English font</button><button class="btn ghost" id="resetEnglishFont" type="button">Reset English</button></div>
+   <input type="file" id="englishFontFile" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" class="hidden">
+   <div id="englishCustomFonts" class="font-list"></div>
+   <div class="font-preview"><div class="tiny muted">Live preview</div><div class="font-preview-hanzi" style="font-size:30px;font-weight:700" lang="zh-CN">汉字识别 · 学习中文</div><div class="font-preview-english" style="font-size:17px">Learning Chinese · HSK vocabulary</div><div class="font-preview-english tiny muted">Nǐ hǎo · Pinyin · English meaning</div></div>
+   <p class="tiny muted">Supported custom fonts: TTF, OTF, WOFF and WOFF2. Uploaded fonts remain on this device. Use fonts that include Simplified Chinese glyphs for Hanzi.</p>
+  </section>
+  <hr class="divider">
+  <div class="field"><label>Default review interval (days)</label><input id="intervals" value="0.01,1,3,7,14,30" placeholder="0.01,1,3,7,14,30"></div>
+  <p class="tiny muted">Intervals are used as starting guidance. Again and Hard schedule sooner; Easy schedules later.</p>
+  <hr class="divider">
+  <div class="actions"><button class="btn" id="exportAllBtn">Export full backup</button><button class="btn" id="restoreBtn">Restore backup</button></div>
+  <input type="file" id="restoreFile" accept=".json,application/json" class="hidden">
+  <p class="tiny muted">Backups include decks, cards, progress, and embedded media.</p>
+ </div>
+ <div class="panel" style="margin-top:12px"><b>About LetsFlash · Developer</b><p style="font-weight:750;margin:10px 0 2px">MD MONEM SHAHREER SURJO</p><p class="tiny muted" style="margin:0 0 8px">Software Engineer · App Developer</p><p class="tiny">Email: <a href="mailto:monemshahreersurjo@gmail.com" style="color:var(--accent2)">monemshahreersurjo@gmail.com</a></p><hr class="divider"><p class="tiny muted">LetsFlash is an open-source, free-to-use learning app, created to make daily study simple and accessible. Please use it responsibly for personal and educational purposes. Do not use this app for commercial purposes or for harmful, illegal, or malicious intentions. Respect others, learn something new, and keep sharing knowledge.</p><p style="font-weight:750;margin-bottom:0">Happy using! ✨</p></div>
+ <div class="panel" style="margin-top:12px"><b>Local data</b><p class="tiny muted">Your study data stays on this device unless you export and share a backup. Clearing app data may erase it.</p><button class="btn danger" id="clearAllBtn">Delete all local data</button></div>
+</section>
+</div>
+
+<div id="modalRoot"></div><div id="toast" class="toast hidden"></div>
+<input type="file" id="importFile" accept=".csv,.txt,.json,text/csv,text/plain,application/json" class="hidden">
+
+<script src="./native-bridge.bundle.js"></script>
+<script>
+(() => {
+'use strict';
+const DB_NAME='daily-cards-db', DB_VERSION=2, STORE='state', FONT_STORE='fontAssets';
+let db, state={decks:[],theme:'dark',backgroundColor:null,intervals:[0.01,1,3,7,14,30],fonts:{hanzi:'noto-sans-sc',english:'roboto',hanziSize:54,englishSize:23}}, fontRecords=[], fontObjectUrls=new Map(), activeDeckId=null, activeCardIds=[], cardIndex=0, revealed=false, typingOn=false, currentView='home';
+const $=id=>document.getElementById(id);
+const uid=()=> 'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
+const clone=o=>JSON.parse(JSON.stringify(o));
+function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').classList.add('hidden'),2400)}
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE);if(!d.objectStoreNames.contains(FONT_STORE))d.createObjectStore(FONT_STORE,{keyPath:'id'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+function dbGet(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).get('app');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+function dbSet(){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(state,'app');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function fontGetAll(){return new Promise((resolve,reject)=>{const r=db.transaction(FONT_STORE).objectStore(FONT_STORE).getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error)})}
+function fontPut(record){return new Promise((resolve,reject)=>{const tx=db.transaction(FONT_STORE,'readwrite');tx.objectStore(FONT_STORE).put(record);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function fontDelete(id){return new Promise((resolve,reject)=>{const tx=db.transaction(FONT_STORE,'readwrite');tx.objectStore(FONT_STORE).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+const BUILTIN_FONTS={
+ 'noto-sans-sc':{family:'"Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","PingFang SC",sans-serif',label:'Noto Sans SC'},
+ 'noto-serif-sc':{family:'"Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC","Songti SC","STSong",serif',label:'Noto Serif SC'},
+ 'songti-sc':{family:'"Songti SC","STSong","Noto Serif CJK SC","AR PL UMing CN",serif',label:'Songti SC'},
+ 'roboto':{family:'Roboto,"Arial",sans-serif',label:'Roboto'},
+ 'inter':{family:'Inter,"Arial",sans-serif',label:'Inter'},
+ 'lato':{family:'Lato,"Arial",sans-serif',label:'Lato'},
+ 'georgia':{family:'Georgia,"Noto Serif",serif',label:'Georgia'}
+};
+function selectedFamily(kind){const id=state.fonts?.[kind]|| (kind==='hanzi'?'noto-sans-sc':'roboto');if(id.startsWith('custom:')){const f=fontRecords.find(x=>x.id===id.slice(7));return f?'"'+f.familyName+'",sans-serif':BUILTIN_FONTS[kind==='hanzi'?'noto-sans-sc':'roboto'].family}return (BUILTIN_FONTS[id]||BUILTIN_FONTS[kind==='hanzi'?'noto-sans-sc':'roboto']).family}
+function applyFonts(){state.fonts=state.fonts||{hanzi:'noto-sans-sc',english:'roboto',hanziSize:54,englishSize:23};const root=document.documentElement;root.style.setProperty('--hanzi-font',selectedFamily('hanzi'));root.style.setProperty('--english-font',selectedFamily('english'));root.style.setProperty('--hanzi-size',(Number(state.fonts.hanziSize)||54)+'px');root.style.setProperty('--english-size',(Number(state.fonts.englishSize)||23)+'px');}
+async function loadSavedFonts(){fontRecords=await fontGetAll();for(const f of fontRecords){try{const url=URL.createObjectURL(f.blob);fontObjectUrls.set(f.id,url);const face=new FontFace(f.familyName,`url(${url})`);await face.load();document.fonts.add(face)}catch(e){console.warn('Could not load saved font',f.name,e)}}applyFonts()}
+function renderFontControls(){const f=state.fonts||{};$('hanziFontSelect').innerHTML='<option value="noto-sans-sc">Noto Sans SC · Recommended</option><option value="noto-serif-sc">Noto Serif SC</option><option value="songti-sc">Songti SC · System classic</option>'+fontRecords.filter(x=>x.category==='hanzi').map(x=>`<option value="custom:${esc(x.id)}">${esc(x.name)} · Custom</option>`).join('');$('englishFontSelect').innerHTML='<option value="roboto">Roboto · Default</option><option value="inter">Inter</option><option value="lato">Lato</option><option value="georgia">Georgia</option>'+fontRecords.filter(x=>x.category==='english').map(x=>`<option value="custom:${esc(x.id)}">${esc(x.name)} · Custom</option>`).join('');$('hanziFontSelect').value=f.hanzi||'noto-sans-sc';$('englishFontSelect').value=f.english||'roboto';$('hanziSize').value=f.hanziSize||54;$('englishSize').value=f.englishSize||23;$('hanziSizeLabel').textContent=$('hanziSize').value;$('englishSizeLabel').textContent=$('englishSize').value;renderCustomFontList('hanzi');renderCustomFontList('english');applyFonts()}
+function renderCustomFontList(kind){const target=$(kind==='hanzi'?'hanziCustomFonts':'englishCustomFonts');const list=fontRecords.filter(x=>x.category===kind);target.innerHTML=list.map(f=>`<div class="font-item"><span class="tiny">${esc(f.name)}</span><button class="btn danger" type="button" data-delete-font="${esc(f.id)}" aria-label="Delete ${esc(f.name)}">Delete</button></div>`).join('');target.querySelectorAll('[data-delete-font]').forEach(b=>b.onclick=()=>removeCustomFont(b.dataset.deleteFont))}
+async function addCustomFont(file,kind){if(!file)return;const ext=(file.name.split('.').pop()||'').toLowerCase();if(!['ttf','otf','woff','woff2'].includes(ext)){toast('Choose a TTF, OTF, WOFF or WOFF2 font file');return}if(file.size>25*1024*1024){toast('Font file is too large (maximum 25 MB)');return}const id=uid(),familyName='LetsFlashFont_'+id.replace(/[^a-zA-Z0-9]/g,'');const url=URL.createObjectURL(file);try{const face=new FontFace(familyName,`url(${url})`);await face.load();document.fonts.add(face);const record={id,name:file.name.replace(/\.[^.]+$/,''),familyName,category:kind,blob:file,createdAt:Date.now()};await fontPut(record);fontRecords.push(record);fontObjectUrls.set(id,url);state.fonts=state.fonts||{};state.fonts[kind]='custom:'+id;await dbSet();renderFontControls();toast('Custom font added and applied')}catch(e){URL.revokeObjectURL(url);toast('This font could not be loaded. Try another valid font file.');console.error(e)}}
+async function removeCustomFont(id){const f=fontRecords.find(x=>x.id===id);if(!f)return;if(!confirm(`Delete custom font “${f.name}”?`))return;await fontDelete(id);fontRecords=fontRecords.filter(x=>x.id!==id);const url=fontObjectUrls.get(id);if(url)URL.revokeObjectURL(url);fontObjectUrls.delete(id);if(state.fonts?.hanzi==='custom:'+id)state.fonts.hanzi='noto-sans-sc';if(state.fonts?.english==='custom:'+id)state.fonts.english='roboto';await dbSet();renderFontControls();toast('Font deleted')}
+async function setFont(kind,value){state.fonts=state.fonts||{};state.fonts[kind]=value;applyFonts();await dbSet()}
+
+async function save(){await dbSet();renderHome()}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function view(name){currentView=name;document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$(name+'View').classList.add('active');window.scrollTo(0,0)}
+function getDeck(){return state.decks.find(d=>d.id===activeDeckId)}
+function getCard(){const d=getDeck();return d?.cards.find(c=>c.id===activeCardIds[cardIndex])}
+function percent(deck){if(!deck?.cards.length)return 0;return Math.round(deck.cards.filter(c=>c.reviews?.length).length/deck.cards.length*100)}
+function renderHome(){
+ $('deckCount').textContent=state.decks.length+' deck'+(state.decks.length===1?'':'s');
+ const list=$('deckList');
+ if(!state.decks.length){list.innerHTML='<div class="empty"><div style="font-size:30px">📚</div><b>No decks yet</b><p>Import a daily CSV, TXT, or JSON file to begin.</p><button class="btn primary" id="emptyImport">Import your first deck</button></div>';$('emptyImport').onclick=()=> $('importFile').click();return}
+ list.innerHTML=state.decks.slice().sort((a,b)=>b.createdAt-a.createdAt).map(d=>`<button class="deck" data-deck="${esc(d.id)}"><div class="deckicon">文</div><div class="deckmain"><div class="deckname">${esc(d.name)}</div><div class="deckmeta">${d.cards.length} cards · ${percent(d)}% reviewed</div><div class="progress"><i style="width:${percent(d)}%"></i></div></div><span class="muted">›</span></button>`).join('');
+ list.querySelectorAll('[data-deck]').forEach(b=>b.onclick=()=>openDeck(b.dataset.deck));
+}
+function openDeck(id){activeDeckId=id;renderDeckDetail();view('deck')}
+function renderDeckDetail(){
+ const d=getDeck();if(!d)return;
+ $('detailName').textContent=d.name;$('detailInfo').textContent=`${d.cards.length} cards · Created ${new Date(d.createdAt).toLocaleDateString()}`;
+ $('detailPercent').textContent=percent(d)+'%';$('detailProgress').style.width=percent(d)+'%';$('detailStats').textContent=`${d.cards.filter(c=>c.reviews?.length).length} reviewed · ${d.cards.reduce((n,c)=>n+(c.reviews?.length||0),0)} ratings saved`;
+ $('detailCardCount').textContent=d.cards.length;
+ $('cardManageList').innerHTML=d.cards.map((c,i)=>`<div class="deck"><div class="deckicon">${i+1}</div><div class="deckmain"><div class="deckname hanzi-inline" lang="zh-CN">${esc(c.front||c.chinese||'Untitled')}</div><div class="deckmeta">${esc(c.pinyin||c.meaning||'No translation')} · ${(c.reviews||[]).length} ratings</div></div><button class="btn" data-edit="${esc(c.id)}">Edit</button></div>`).join('')||'<div class="empty">This deck has no cards.</div>';
+ $('cardManageList').querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editCard(b.dataset.edit));
+}
+function startStudy(){const d=getDeck();if(!d||!d.cards.length){toast('This deck has no cards yet');return}activeCardIds=d.cards.slice().sort((a,b)=>{const ad=a.reviews?.length?a.reviews[a.reviews.length-1].nextDue:0;const bd=b.reviews?.length?b.reviews[b.reviews.length-1].nextDue:0;return ad-bd}).map(c=>c.id);cardIndex=0;revealed=false;typingOn=false;$('typingToggle').textContent='⌨ Typing: Off';view('study');renderCard()}
+function renderCard(){
+ const d=getDeck(),c=getCard();if(!d||!c)return;
+ revealed=false;$('deckLabel').textContent=d.name;$('frontText').textContent=c.front??c.chinese??'';$('category').textContent=c.category||c.type||'';
+ $('cardPosition').textContent=`Card ${cardIndex+1} / ${activeCardIds.length}`;$('deckProgress').textContent=percent(d)+'% reviewed';$('studyProgress').style.width=((cardIndex+1)/activeCardIds.length*100)+'%';
+ $('answerPanel').classList.add('hidden');$('revealBtn').classList.remove('hidden');$('ratingArea').classList.add('hidden');$('answerInput').value='';$('checkResult').textContent='';
+ $('typingArea').classList.toggle('hidden',!typingOn);$('prevBtn').disabled=cardIndex===0;$('nextBtn').disabled=cardIndex===activeCardIds.length-1;
+}
+function reveal(){
+ const c=getCard();if(!c)return;revealed=true;
+ const lines=[];
+ if(c.pinyin)lines.push(`<div class="pinyin english-text">${esc(c.pinyin)}</div>`);
+ if(c.meaning||c.translation)lines.push(`<div class="meaning english-text">${esc(c.meaning||c.translation)}</div>`);
+ if(c.translation&&c.meaning&&c.translation!==c.meaning)lines.push(`<p class="english-text"><b>Translation:</b> ${esc(c.translation)}</p>`);
+ if(c.explanation)lines.push(`<p class="english-text"><b>Explanation:</b> ${esc(c.explanation)}</p>`);
+ if(c.notes)lines.push(`<p class="english-text"><b>Notes:</b> ${esc(c.notes)}</p>`);
+ if(c.example)lines.push(`<p><b>Example:</b><br><span class="hanzi-text" lang="zh-CN">${esc(c.example)}</span></p>`);
+ if(c.example_pinyin)lines.push(`<p class="pinyin english-text">${esc(c.example_pinyin)}</p>`);
+ if(c.example_translation)lines.push(`<p class="muted english-text">${esc(c.example_translation)}</p>`);
+ if(c.grammar)lines.push(`<p class="english-text"><b>Grammar:</b> ${esc(c.grammar)}</p>`);
+ if(c.image)lines.push(`<img alt="Flashcard image" src="${esc(c.image)}" onerror="this.style.display='none'">`);
+ if(c.audio)lines.push(`<div class="audio"><button class="btn primary" id="playAudio">▶ Tap to play audio</button><span class="tiny muted">Audio</span></div>`);
+ $('answerPanel').innerHTML=lines.join('')||'<p class="muted">No additional answer information was provided.</p>';
+ $('answerPanel').classList.remove('hidden');$('revealBtn').classList.add('hidden');$('ratingArea').classList.remove('hidden');
+ if(c.audio){$('playAudio').onclick=()=>{try{const a=new Audio(c.audio);a.play().catch(()=>toast('Audio could not be played on this device'))}catch(e){toast('Audio could not be played')}}}
+}
+function rate(r){
+ const c=getCard();if(!c)return;c.reviews=c.reviews||[];const now=Date.now();const map={again:0.01,hard:1,good:3,easy:7};let days=map[r];
+ const intervals=state.intervals||[0.01,1,3,7,14,30];if(r==='hard')days=intervals[Math.min(1,intervals.length-1)]||1;if(r==='good')days=intervals[Math.min(2,intervals.length-1)]||3;if(r==='easy')days=intervals[Math.min(4,intervals.length-1)]||7;
+ c.reviews.push({rating:r,at:now,nextDue:now+days*86400000});dbSet().then(()=>{toast('Rating saved');$('deckProgress').textContent=percent(getDeck())+'% reviewed';renderHome()});
+}
+function parseCSV(text){
+ text=String(text||'').replace(/^\uFEFF/,'');
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){
+  const ch=text[i],n=text[i+1];
+  if(ch==='"'&&quoted&&n==='"'){cell+='"';i++}
+  else if(ch==='"'){quoted=!quoted}
+  else if(ch===','&&!quoted){row.push(cell);cell=''}
+  else if((ch==='\n'||ch==='\r')&&!quoted){if(ch==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell=''}
+  else cell+=ch;
+ }
+ row.push(cell);if(row.some(x=>x.trim()))rows.push(row);
+ if(!rows.length)return [];
+ const aliases={
+  chinese_hanzi:'front',hanzi:'front',chinese:'front',word:'front',vocabulary:'front',term:'front',
+  example_hanzi:'example',example_sentence:'example',sample_sentence:'example',
+  sentence_pinyin:'example_pinyin',example_meaning:'example_translation',sentence_translation:'example_translation',
+  english:'meaning',definition:'meaning',meaning_translation:'meaning',
+  grammar_explanation:'grammar',grammar_pattern:'grammar',pattern:'grammar',
+  word_type:'category',level:'category',hsk_level:'category',
+  image_url:'image',image_data:'image',audio_url:'audio',audio_data:'audio',
+  additional_notes:'notes',note:'notes'
+ };
+ const headers=rows.shift().map(h=>{
+  const key=h.trim().toLowerCase().replace(/^\uFEFF/,'').replace(/[()]/g,'').replace(/[\s-]+/g,'_').replace(/[^\w]/g,'').replace(/^no_?$/,'row_number');
+  return aliases[key]||key;
+ });
+ return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()]))).filter(o=>Object.entries(o).some(([k,v])=>k!=='row_number'&&v));
+}
+function normalizeCard(o){
+ const pick=(...keys)=>{for(const k of keys){if(o[k]!==undefined&&o[k]!==null&&String(o[k]).trim()!=='')return o[k]}return ''};
+ const hasHan=v=>/[\u3400-\u9fff]/.test(String(v||''));
+ const looksPinyin=v=>/[āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/i.test(String(v||''))||/^[a-züv\s'’-]+$/i.test(String(v||'').trim());
+ let pinyin=String(pick('pinyin'));
+ let meaning=String(pick('meaning','english','answer'));
+ if(hasHan(pinyin)&&looksPinyin(meaning)){pinyin=meaning;meaning=String(pick('translation'))}
+ return {
+  id:uid(),front:String(pick('front','chinese','chinese_hanzi','hanzi','word','question')),
+  chinese:String(pick('chinese','front','chinese_hanzi','hanzi','word','question')),
+  pinyin,meaning,translation:String(pick('translation')),
+  explanation:String(pick('explanation','definition')),
+  example:String(pick('example','example_hanzi','example_sentence','sample_sentence')),
+  example_pinyin:String(pick('example_pinyin','sentence_pinyin')),
+  example_translation:String(pick('example_translation','example_meaning','sentence_translation')),
+  image:String(pick('image','image_data','image_url')),audio:String(pick('audio','audio_data','audio_url')),
+  notes:String(pick('notes','additional_notes','note')),grammar:String(pick('grammar','grammar_explanation','grammar_pattern','pattern')),
+  category:String(pick('category','topic','hsk_level','level')),reviews:[]
+ };
+}
+async function importFile(file){
+ const txt=await file.text();let records=[],name=file.name.replace(/\.[^.]+$/,'');
+ try{
+  if(file.name.toLowerCase().endsWith('.json')){const parsed=JSON.parse(txt);records=Array.isArray(parsed)?parsed:(parsed.cards||parsed.data||[]);name=parsed.deckName||parsed.name||name}
+  else if(file.name.toLowerCase().endsWith('.txt')){records=txt.split(/\r?\n/).filter(x=>x.trim()).map(line=>{const p=line.split('|');return {front:p[0],pinyin:p[1],meaning:p[2],example:p[3],notes:p.slice(4).join('|')}})}
+  else records=parseCSV(txt);
+  if(!Array.isArray(records)||!records.length)throw new Error('No cards found. Check the file format.');
+  const cards=records.map(normalizeCard).filter(c=>c.front);
+  if(!cards.length)throw new Error('No cards have a front/chinese/word field.');
+  showModal(`<div class="modalhead"><h2>Import preview</h2><button class="btn" id="closeModal">✕</button></div><p class="muted tiny">${esc(file.name)} · ${cards.length} cards detected</p><p class="tiny muted">Supported fields: word, Pinyin, meaning, explanation, example Hanzi, example Pinyin, example translation, grammar, category, notes, optional image and audio.</p><div class="panel"><b>${esc(cards[0].front)}</b><p class="muted">${esc(cards[0].pinyin)} · ${esc(cards[0].meaning)}</p><span class="tag">${cards.filter(c=>c.image).length} images · ${cards.filter(c=>c.audio).length} audio files</span></div><div class="field"><label>Deck name</label><input id="importName" value="${esc(name)}"></div><div class="actions"><button class="btn" id="cancelImport">Cancel</button><button class="btn primary" id="confirmImport">Import ${cards.length} cards</button></div>`);
+  $('closeModal').onclick=closeModal;$('cancelImport').onclick=closeModal;
+  $('confirmImport').onclick=async()=>{const deck={id:uid(),name:$('importName').value.trim()||name,cards,createdAt:Date.now()};state.decks.push(deck);await dbSet();closeModal();renderHome();toast(`${cards.length} cards imported`);};
+ }catch(e){toast('Import failed: '+e.message)}
+}
+function showModal(content){$('modalRoot').innerHTML=`<div class="modalback" id="modalBack"><div class="modal">${content}</div></div>`}
+function closeModal(){$('modalRoot').innerHTML=''}
+function addDeck(){showModal(`<div class="modalhead"><h2>New deck</h2><button class="btn" id="closeModal">✕</button></div><div class="field"><label>Deck name</label><input id="newDeckName" placeholder="e.g. HSK4 Day 01"></div><div class="actions"><button class="btn" id="cancel">Cancel</button><button class="btn primary" id="create">Create deck</button></div>`);$('closeModal').onclick=closeModal;$('cancel').onclick=closeModal;$('create').onclick=async()=>{const n=$('newDeckName').value.trim();if(!n){toast('Enter a deck name');return}state.decks.push({id:uid(),name:n,cards:[],createdAt:Date.now()});await dbSet();closeModal();renderHome();toast('Deck created')}}
+function editCard(id){const d=getDeck(),c=d.cards.find(x=>x.id===id);if(!c)return;cardForm(c,'Edit card',async data=>{Object.assign(c,data);await dbSet();closeModal();renderDeckDetail();toast('Card updated')},true)}
+function cardForm(existing,title,onSave,allowDelete=false){
+ const c=existing||{};showModal(`<div class="modalhead"><h2>${title}</h2><button class="btn" id="closeModal">✕</button></div>
+ <div class="field"><label>Chinese / front (required)</label><input id="f_front" value="${esc(c.front||c.chinese||'')}"></div>
+ <div class="field"><label>Pinyin</label><input id="f_pinyin" value="${esc(c.pinyin||'')}"></div>
+ <div class="field"><label>Meaning (English)</label><input id="f_meaning" value="${esc(c.meaning||'')}"></div>
+ <div class="field"><label>Additional translation (optional)</label><input id="f_translation" value="${esc(c.translation||'')}"></div>
+ <div class="field"><label>Explanation / notes</label><textarea id="f_explanation">${esc(c.explanation||c.notes||'')}</textarea></div>
+ <div class="field"><label>Example sentence (Hanzi)</label><input id="f_example" value="${esc(c.example||'')}"></div>
+ <div class="field"><label>Example sentence Pinyin</label><input id="f_example_pinyin" value="${esc(c.example_pinyin||'')}"></div>
+ <div class="field"><label>Example translation</label><input id="f_example_translation" value="${esc(c.example_translation||'')}"></div>
+ <div class="field"><label>Grammar explanation / pattern</label><textarea id="f_grammar">${esc(c.grammar||'')}</textarea></div>
+ <div class="field"><label>Additional notes</label><textarea id="f_notes">${esc(c.notes||'')}</textarea></div>
+ <div class="field"><label>Category</label><input id="f_category" value="${esc(c.category||'')}"></div>
+ <div class="field"><label>Image URL or data URI (optional)</label><input id="f_image" value="${esc(c.image||'')}"></div>
+ <div class="field"><label>Or attach an image from this phone</label><input id="f_image_file" type="file" accept="image/*"></div>
+ <div class="field"><label>Audio URL or data URI (optional)</label><input id="f_audio" value="${esc(c.audio||'')}"></div>
+ <div class="field"><label>Or attach an audio file from this phone</label><input id="f_audio_file" type="file" accept="audio/*,.mp3,.wav,.m4a,.ogg"></div>
+ <div class="actions"><button class="btn" id="cancelCard">Cancel</button><button class="btn primary" id="saveCard">Save card</button></div>${allowDelete?'<button class="btn danger" id="deleteCard" style="width:100%;margin-top:9px">Delete this card</button>':''}`);
+ $('closeModal').onclick=closeModal;$('cancelCard').onclick=closeModal;
+ const fileAsDataURI=file=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(file)});
+ $('f_image_file').onchange=async e=>{if(e.target.files[0]){try{$('f_image').value=await fileAsDataURI(e.target.files[0]);toast('Image attached')}catch(err){toast('Could not read image file')}}};
+ $('f_audio_file').onchange=async e=>{if(e.target.files[0]){try{$('f_audio').value=await fileAsDataURI(e.target.files[0]);toast('Audio attached')}catch(err){toast('Could not read audio file')}}};
+ $('saveCard').onclick=()=>{const data={front:$('f_front').value.trim(),chinese:$('f_front').value.trim(),pinyin:$('f_pinyin').value.trim(),meaning:$('f_meaning').value.trim(),translation:$('f_translation').value.trim(),explanation:$('f_explanation').value.trim(),example:$('f_example').value.trim(),example_pinyin:$('f_example_pinyin').value.trim(),example_translation:$('f_example_translation').value.trim(),grammar:$('f_grammar').value.trim(),notes:$('f_notes').value.trim(),category:$('f_category').value.trim(),image:$('f_image').value.trim(),audio:$('f_audio').value.trim()};if(!data.front){toast('Chinese/front text is required');return}onSave(data)};
+ if(allowDelete)$('deleteCard').onclick=async()=>{if(confirm('Delete this card?')){const d=getDeck();d.cards=d.cards.filter(x=>x.id!==c.id);await dbSet();closeModal();renderDeckDetail();toast('Card deleted')}};
+}
+function downloadFile(name,mime,content){
+ if(window.NativeFiles?.saveAndShare){
+  window.NativeFiles.saveAndShare(name,content).then(()=>toast('File ready to save or share')).catch(err=>{console.error(err);fallbackDownload(name,mime,content);toast('Native save unavailable; used browser download')});
+ }else fallbackDownload(name,mime,content);
+}
+function fallbackDownload(name,mime,content){const blob=new Blob([content],{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+function exportAll(){const data={app:'LetsFlash',version:1,exportedAt:new Date().toISOString(),state};downloadFile('daily-cards-backup.json','application/json',JSON.stringify(data,null,2));toast('Backup export started')}
+function exportDeck(){const d=getDeck();if(d)downloadFile((d.name.replace(/[^a-z0-9-_]+/gi,'_')||'deck')+'.json','application/json',JSON.stringify({deckName:d.name,cards:d.cards},null,2))}
+function wire(){
+ $('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{if(e.target.files[0])importFile(e.target.files[0]);e.target.value=''};
+ $('addDeckBtn').onclick=addDeck;$('themeBtn').onclick=toggleTheme;$('settingsBtn').onclick=()=>{syncSettings();view('settings')};
+ $('settingsBack').onclick=()=>view('home');$('backBtn').onclick=()=>view('deck');$('deckBackBtn').onclick=()=>view('home');
+ $('studyDeckBtn').onclick=startStudy;$('addCardBtn').onclick=()=>cardForm(null,'Add card',async data=>{getDeck().cards.push({...data,id:uid(),reviews:[]});await dbSet();closeModal();renderDeckDetail();toast('Card added')});
+ $('prevBtn').onclick=()=>{if(cardIndex>0){cardIndex--;renderCard()}};$('nextBtn').onclick=()=>{if(cardIndex<activeCardIds.length-1){cardIndex++;renderCard()}};
+ $('revealBtn').onclick=reveal;$('shuffleBtn').onclick=()=>{for(let i=activeCardIds.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[activeCardIds[i],activeCardIds[j]]=[activeCardIds[j],activeCardIds[i]]}cardIndex=0;renderCard();toast('Cards shuffled')};
+ $('typingToggle').onclick=()=>{typingOn=!typingOn;$('typingToggle').textContent='⌨ Typing: '+(typingOn?'On':'Off');renderCard()};
+ $('checkBtn').onclick=()=>{const c=getCard(),answer=$('answerInput').value.trim().replace(/\s/g,''),correct=(c.meaning||c.translation||'').trim().replace(/\s/g,'');$('checkResult').textContent=answer&&correct?(answer===correct?'✓ Exact match':'Compare your answer after revealing'):'Enter an answer first'};
+ $('restartBtn').onclick=()=>{cardIndex=0;renderCard()};document.querySelectorAll('.rating').forEach(b=>b.onclick=()=>rate(b.dataset.r));
+ $('deckMenuBtn').onclick=()=>{showModal(`<div class="modalhead"><h2>Deck options</h2><button class="btn" id="closeModal">✕</button></div><div class="actions"><button class="btn" id="renameDeck">Rename</button><button class="btn" id="exportDeck">Export deck</button><button class="btn danger" id="deleteDeck">Delete deck</button></div>`);$('closeModal').onclick=closeModal;$('renameDeck').onclick=renameDeck;$('exportDeck').onclick=()=>{closeModal();exportDeck()};$('deleteDeck').onclick=async()=>{if(confirm('Delete this deck and its cards?')){state.decks=state.decks.filter(d=>d.id!==activeDeckId);await dbSet();closeModal();view('home');renderHome();toast('Deck deleted')}}};
+ $('deckEditBtn').onclick=()=>renameDeck();
+ $('exportAllBtn').onclick=exportAll;$('restoreBtn').onclick=()=>$('restoreFile').click();$('restoreFile').onchange=async e=>{try{const p=JSON.parse(await e.target.files[0].text());const s=p.state||p;if(!Array.isArray(s.decks))throw Error('Invalid backup');if(confirm('Replace current local data with this backup?')){state=s;state.fonts=state.fonts||{hanzi:'noto-sans-sc',english:'roboto',hanziSize:54,englishSize:23};await dbSet();applyTheme();applyFonts();renderHome();toast('Backup restored')}}catch(err){toast('Restore failed: '+err.message)}e.target.value=''};
+ $('clearAllBtn').onclick=async()=>{if(confirm('Permanently delete all decks and settings on this device?')){state={decks:[],theme:state.theme,backgroundColor:state.backgroundColor,intervals:state.intervals,fonts:state.fonts};await dbSet();renderHome();toast('Local data deleted')}};
+ $('intervals').onchange=async()=>{const vals=$('intervals').value.split(',').map(Number).filter(n=>Number.isFinite(n)&&n>0);if(!vals.length){toast('Enter valid positive intervals');return}state.intervals=vals;await dbSet();toast('Intervals saved')};
+ $('backgroundColor').oninput=()=>{const c=$('backgroundColor').value;$('backgroundHex').value=c;setBackground(c)};
+ $('backgroundHex').onchange=()=>{const c=$('backgroundHex').value.trim();if(/^#[0-9a-fA-F]{6}$/.test(c)){ $('backgroundColor').value=c;setBackground(c)}else{toast('Enter a valid hex colour, e.g. #35205f');$('backgroundHex').value=state.backgroundColor||'#0b1020'}};
+ $('resetBackground').onclick=()=>{state.backgroundColor=null;applyTheme();dbSet();const c=state.theme==='light'?'#f4f6fb':'#0b1020';$('backgroundColor').value=c;$('backgroundHex').value=c;toast('Background reset')};
+ $('themeSelect').onchange=()=>{state.theme=$('themeSelect').value;applyTheme();dbSet()};$('deckMenuBtn').addEventListener('click',()=>{if(!$('renameDeck'))return});
+ $('hanziFontSelect').onchange=()=>setFont('hanzi',$('hanziFontSelect').value);$('englishFontSelect').onchange=()=>setFont('english',$('englishFontSelect').value);
+ $('hanziSize').oninput=()=>{state.fonts.hanziSize=Number($('hanziSize').value);$('hanziSizeLabel').textContent=$('hanziSize').value;applyFonts();dbSet()};$('englishSize').oninput=()=>{state.fonts.englishSize=Number($('englishSize').value);$('englishSizeLabel').textContent=$('englishSize').value;applyFonts();dbSet()};
+ $('uploadHanziFont').onclick=()=>$('hanziFontFile').click();$('uploadEnglishFont').onclick=()=>$('englishFontFile').click();$('hanziFontFile').onchange=e=>{addCustomFont(e.target.files[0],'hanzi');e.target.value=''};$('englishFontFile').onchange=e=>{addCustomFont(e.target.files[0],'english');e.target.value=''};
+ $('resetHanziFont').onclick=async()=>{state.fonts.hanzi='noto-sans-sc';state.fonts.hanziSize=54;await dbSet();renderFontControls();toast('Chinese font reset')};$('resetEnglishFont').onclick=async()=>{state.fonts.english='roboto';state.fonts.englishSize=23;await dbSet();renderFontControls();toast('English font reset')};
+
+}
+function renameDeck(){closeModal();const d=getDeck();if(!d)return;showModal(`<div class="modalhead"><h2>Rename deck</h2><button class="btn" id="closeModal">✕</button></div><div class="field"><input id="renameValue" value="${esc(d.name)}"></div><div class="actions"><button class="btn" id="cancelRename">Cancel</button><button class="btn primary" id="saveRename">Save</button></div>`);$('closeModal').onclick=closeModal;$('cancelRename').onclick=closeModal;$('saveRename').onclick=async()=>{d.name=$('renameValue').value.trim()||d.name;await dbSet();closeModal();renderDeckDetail();toast('Deck renamed')}}
+function setBackground(color){state.backgroundColor=color;document.documentElement.style.setProperty('--bg',color);dbSet()}
+function applyTheme(){document.documentElement.dataset.theme=state.theme||'dark';if(state.backgroundColor)document.documentElement.style.setProperty('--bg',state.backgroundColor);else document.documentElement.style.removeProperty('--bg');$('themeBtn').textContent=state.theme==='dark'?'☼':'☾'}
+function toggleTheme(){state.theme=state.theme==='dark'?'light':'dark';applyTheme();dbSet()}
+function syncSettings(){$('themeSelect').value=state.theme||'dark';$('intervals').value=(state.intervals||[0.01,1,3,7,14,30]).join(',');const c=state.backgroundColor||(state.theme==='light'?'#f4f6fb':'#0b1020');$('backgroundColor').value=c;$('backgroundHex').value=c;renderFontControls()}
+async function init(){
+ try{db=await openDB();const saved=await dbGet();if(saved)state={...state,...saved};else await dbSet();state.fonts=state.fonts||{hanzi:'noto-sans-sc',english:'roboto',hanziSize:54,englishSize:23};await loadSavedFonts();applyTheme();applyFonts();wire();renderHome();
+ }catch(e){document.body.innerHTML='<div style="padding:24px;color:#fff">Could not open local database. Please use a modern browser with IndexedDB enabled.</div>';console.error(e)}
+}
+init();
+})();
+</script>
+</body></html>

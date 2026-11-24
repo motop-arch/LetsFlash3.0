@@ -1,0 +1,20 @@
+{
+  "deckName": "LetsFlash · Complete vocabulary example",
+  "cards": [
+    {
+      "front": "你好",
+      "pinyin": "nǐ hǎo",
+      "meaning": "hello",
+      "translation": "",
+      "explanation": "A common greeting used when meeting someone.",
+      "example": "你好！你今天好吗？",
+      "example_pinyin": "Nǐ hǎo! Nǐ jīntiān hǎo ma?",
+      "example_translation": "Hello! How are you today?",
+      "grammar": "吗 turns a statement into a yes/no question.",
+      "category": "HSK1 · greeting",
+      "image": "",
+      "audio": "",
+      "notes": "Image and audio are optional."
+    }
+  ]
+}

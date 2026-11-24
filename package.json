@@ -1,0 +1,20 @@
+{
+  "name": "letsflash-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LetsFlash \u2014 offline-first personal flashcard app",
+  "scripts": {
+    "build": "node -e \"const fs=require('fs');fs.rmSync('www',{recursive:true,force:true});fs.mkdirSync('www',{recursive:true});for(const f of ['index.html','letsflash-logo.png'])fs.copyFileSync(f,'www/'+f);if(fs.existsSync('assets'))fs.cpSync('assets','www/assets',{recursive:true})\""
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/filesystem": "^7.1.4",
+    "@capacitor/share": "^7.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3",
+    "esbuild": "^0.25.5",
+    "@capacitor/assets": "^3.0.5"
+  }
+}
